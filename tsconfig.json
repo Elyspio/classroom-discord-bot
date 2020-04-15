@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["es2015", "ESNext"],
+    "target": "ES2017",
+    "outDir": "./lib",
+    "skipLibCheck": true,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "inlineSourceMap": false,
+    "experimentalDecorators": true
+  },
+  "exclude": [
+    "node_modules",
+    "lib"
+  ]
+}
