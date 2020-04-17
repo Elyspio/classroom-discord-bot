@@ -2,3 +2,5 @@ node_modules
 build
 lib
 .idea
+discord.json
+token.json

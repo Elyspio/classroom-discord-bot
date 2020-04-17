@@ -1,30 +1,29 @@
 import {CommandHandler} from "./CommandHandler";
-import {messages, studentRoleConfig} from "../config";
+import {messages} from "../config";
 import {Message, MessageEmbed} from "discord.js";
-import {ChannelHelper} from "../helper/ChannelHelper";
+import {Service} from "../helper/GuildService";
 
 export class StudentCommandHandler extends CommandHandler {
 
-    public constructor() {
-        super();
-        super.addCommands({
-            // "/help": this.askHelp
-        });
+	public constructor() {
+		super();
+		super.addCommands({
+			// "/help": this.askHelp
+		});
 
-    }
+	}
 
-    public checkRights(message: Message): boolean {
-        console.log("check", message.member.roles.cache);
-        return message.member.roles.cache.array().find(role => role.name === ChannelHelper.vocalToText(studentRoleConfig.name)) !== undefined;
-    }
+	public checkRights(message: Message): boolean {
+		return Service.Permission.isStudent(this.member);
+	}
 
-    private askHelp = async (message: Message): Promise<void> => {
+	private askHelp = async (message: Message): Promise<void> => {
 
-        // do something with queue
-        const embed = new MessageEmbed()
-            .setColor('#51ff7a')
-            .setTitle(messages.helpSummaryTitle)
-            .setDescription(`Votre place dans la file : **${4}**`)
-        await message.channel.send(embed)
-    }
+		// do something with queue
+		const embed = new MessageEmbed()
+			.setColor('#51ff7a')
+			.setTitle(messages.helpSummaryTitle)
+			.setDescription(`Votre place dans la file : **${4}**`)
+		await message.channel.send(embed)
+	}
 }

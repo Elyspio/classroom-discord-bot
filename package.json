@@ -1,25 +1,25 @@
 {
-  "name": "discord-ts-bot",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "discord.js": "^12.1.1",
-    "googleapis": "39",
-    "pkg": "^4.4.4",
-    "pm2": "^4.2.3"
-  },
-  "devDependencies": {
-    "@types/node": "^13.9.5",
-    "nodemon": "latest",
-    "ts-node": "latest",
-    "typescript": "latest"
-  },
-  "pkg": {
-    "scripts": "build/*.js"
-  },
-  "scripts": {
-    "start": "nodemon src/main.ts",
-    "dist": "tsc && scp -r  build/* package.json pi@elyspi:/home/pi/discord/poo"
-  }
+	"name": "discord-ts-bot",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"dependencies": {
+		"discord.js": "^12.1.1",
+		"googleapis": "39",
+		"pkg": "^4.4.4",
+		"pm2": "^4.2.3"
+	},
+	"devDependencies": {
+		"@types/node": "^13.9.5",
+		"nodemon": "latest",
+		"ts-node": "latest",
+		"typescript": "latest"
+	},
+	"pkg": {
+		"scripts": "lib/*.js"
+	},
+	"scripts": {
+		"start": "nodemon src/main.ts",
+		"dist": "wsl rm -rdf lib && tsc && scp -r  lib/* package.json token.json pi@elyspi:/home/pi/discord/poo"
+	}
 }

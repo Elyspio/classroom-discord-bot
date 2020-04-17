@@ -1,0 +1,15 @@
+{
+	"installed": {
+		"client_id": "452229090608-0tmhi0j17f6vqclcf6kb4cg9m8smcsrd.apps.googleusercontent.com",
+		"project_id": "radio-252617",
+		"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+		"token_uri": "https://oauth2.googleapis.com/token",
+		"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+		"client_secret": "q_J2qD4BtI9hG4dp8PIMKAOX",
+		"redirect_uris": [
+			"urn:ietf:wg:oauth:2.0:oob",
+			"http://localhost"
+		]
+	},
+	"apiKey": "AIzaSyATEx4no5i1c17fIMUFgdvQWPUJ9qJ6-O4"
+}
