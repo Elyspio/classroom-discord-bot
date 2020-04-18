@@ -67,7 +67,8 @@ export const permissions: MapAs<"voice" | "text" | "category", PermissionString[
 
 export const emoticons = {
 	needHelp: "✋",
-	accept: "✅"
+	accept: "✅",
+	nop: "🚫"
 }
 
 export const messages = {
@@ -75,6 +76,6 @@ export const messages = {
 	askFirstname: "Quel est ton prénom ?",
 	askLastname: "Quel est ton nom de famille ?",
 	askGroupName: "Quel est le numéro de ton groupe ?",
-	askBackToServer: "Merci d'avoir répondu à mes questions tu peux revenir sur le serveur maintenant.",
+	askBackToServer: "Merci d'avoir répondu à mes questions %s, tu peux revenir sur le serveur maintenant.",
 	helpSummaryTitle: "Liste des personnes demandant de l'aide"
 }

@@ -1,4 +1,4 @@
-import {GuildMember} from "discord.js";
+import {GuildMember, PartialGuildMember} from "discord.js";
 
 export interface Member {
 	discord: GuildMember,
@@ -16,3 +16,5 @@ export enum Level {
 	NEW = "Groupe 2",
 	ADVANCED = "Groupe 1"
 }
+
+export type DiscordMember = GuildMember | PartialGuildMember;

@@ -45,21 +45,38 @@ export namespace Google {
 			return new Cell(row, col, (await Sheet.instance(name)).internalSheet[row][colIndex])
 		}
 
-		public static async find(name: string, value: string): Promise<Cell> {
+		public static async find(name: string, value: string, criters?: { valueInRow: string[] }): Promise<Google.Cell[]> {
 
 			const original = value.replace(/ /g, "_");
 			value = Sheet.normalize(value);
 
 
+			const candidates: Cell[] = [];
+			const finals: Cell[] = [];
+
 			let internalSheet = (await Sheet.instance(name)).internalSheet;
 			for (let row = 0; row < internalSheet.length; row++) {
 				for (let col = 0; col < internalSheet[row].length; col++) {
 					if (Sheet.normalize(internalSheet[row][col]) === value) {
-						return new Cell(row, String.fromCharCode("A".charCodeAt(0) + col), original);
+						candidates.push(new Cell(row, String.fromCharCode("A".charCodeAt(0) + col), original));
 					}
 				}
 			}
-			return null;
+
+
+			if(criters?.valueInRow) {
+				for(let cell of candidates) {
+					const row = internalSheet[cell.row];
+					if(criters.valueInRow.map(val => row.indexOf(val) !== -1).every(b => b === true)) {
+						finals.push(cell);
+					}
+				}
+			}
+			else {
+				return candidates;
+			}
+
+			return finals;
 		}
 
 		private static normalize(str: string): string {

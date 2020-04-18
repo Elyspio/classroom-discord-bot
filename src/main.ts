@@ -1,15 +1,14 @@
-import {Client, GuildMember, PartialGuildMember} from "discord.js";
+import {Client} from "discord.js";
 import {allowedServers} from "./config";
 import {Interactor} from "./Interactor";
 import {JoinManager} from "./Manager/JoinManager";
 import {StudentCommandHandler} from "./commands/StudentCommandHandler";
 import {TeacherCommandHandler} from "./commands/TeacherCommandHandler";
 import {botToken} from "./config/discord.json"
+import {DiscordMember} from "./types";
 
 const bot = new Client();
 
-
-export type DiscordMember = GuildMember | PartialGuildMember;
 bot.once('ready', () => {
 	const teacherCommands = new TeacherCommandHandler()
 	const studentCommands = new StudentCommandHandler()
@@ -41,11 +40,7 @@ bot.once('ready', () => {
 
 });
 
+
 bot.login(botToken).then(() => {
 	console.log("Bot is logged");
 });
-
-
-const fn = async () => {
-}
-fn();

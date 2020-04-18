@@ -1,5 +1,5 @@
-import {DiscordMember} from "../main";
 import {roles} from "../config";
+import {DiscordMember} from "../types";
 
 export namespace Service {
 	class User {
