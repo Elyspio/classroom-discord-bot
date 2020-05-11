@@ -34,8 +34,8 @@ export class TeacherCommandHandler extends CommandHandler {
 		}
 	}
 
-	private async reSign([message]: [Message]) {
-		console.log("resign", message[0], message.channel);
+	private async reSign(message: Message) {
+		console.log("resign", message.channel);
 		const guild = (message.channel as TextChannel).guild;
 		if (guild) {
 			const manager = await (await JoinManager.get(guild)).init();

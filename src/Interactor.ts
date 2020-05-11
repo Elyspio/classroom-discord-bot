@@ -56,7 +56,7 @@ export class Interactor {
 		let output: Member;
 
 		if (this.data.lastname) {
-			students.fromLastName = await Google.Sheet.find(sheetName, this.data.lastname);
+			students.fromLastName = await Google.Sheet.find(sheetName, this.data.lastname, {col: "C"});
 			if (students.fromLastName.length === 0) {
 				await this.dmChannel.send("Désolé, je n'ai pas réussi à te retrouver dans le Google Sheet...\n" +
 					"Peux-tu me donner ton nom encore une fois s'il te plait ?")
@@ -98,6 +98,7 @@ export class Interactor {
 							return !user.bot
 						}, {max: 1, time: 600000, errors: ["time"]});
 						this.data.firstname = x.first().emoji.name === emoticons.accept ? x.first().message.content : "";
+						if(x.first().emoji.name === emoticons.accept) break;
 					}
 					const cell = (await Google.Sheet.find(sheetName, this.data.lastname, {valueInRow: [this.data.firstname]}))[0]
 

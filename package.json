@@ -6,8 +6,7 @@
 	"dependencies": {
 		"discord.js": "^12.1.1",
 		"googleapis": "39",
-		"pkg": "^4.4.4",
-		"pm2": "^4.2.3"
+		"pkg": "^4.4.7"
 	},
 	"devDependencies": {
 		"@types/node": "^13.9.5",
@@ -15,11 +14,9 @@
 		"ts-node": "latest",
 		"typescript": "latest"
 	},
-	"pkg": {
-		"scripts": "lib/*.js"
-	},
 	"scripts": {
 		"start": "nodemon src/main.ts",
-		"dist": "wsl rm -rdf lib && tsc && scp -r  lib/* package.json token.json pi@elyspi:/home/pi/discord/poo"
+		"remote": "wsl rm -rdf lib && tsc && scp -r  lib/* package.json token.json pi@elyspi:/home/pi/discord/poo",
+		"dist": "wsl rm -rdf lib && tsc && pkg lib/main.js --out-path dist "
 	}
 }

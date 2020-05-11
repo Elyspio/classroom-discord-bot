@@ -45,14 +45,13 @@ export namespace Google {
 			return new Cell(row, col, (await Sheet.instance(name)).internalSheet[row][colIndex])
 		}
 
-		public static async find(name: string, value: string, criters?: { valueInRow: string[] }): Promise<Google.Cell[]> {
+		public static async find(name: string, value: string, criters?: { valueInRow?: string[], col?: string }): Promise<Google.Cell[]> {
 
-			const original = value.replace(/ /g, "_");
+			const original = value;
 			value = Sheet.normalize(value);
 
 
-			const candidates: Cell[] = [];
-			const finals: Cell[] = [];
+			let candidates: Cell[] = [];
 
 			let internalSheet = (await Sheet.instance(name)).internalSheet;
 			for (let row = 0; row < internalSheet.length; row++) {
@@ -62,25 +61,31 @@ export namespace Google {
 					}
 				}
 			}
+			const indexToIgnore: number[] = [];
 
 
-			if(criters?.valueInRow) {
-				for(let cell of candidates) {
+			if (criters?.valueInRow) {
+				for (let i = 0; i < candidates.length; i++) {
+
+					if (indexToIgnore.includes(i)) continue;
+
+					let cell = candidates[i];
 					const row = internalSheet[cell.row];
-					if(criters.valueInRow.map(val => row.indexOf(val) !== -1).every(b => b === true)) {
-						finals.push(cell);
+					if (criters.valueInRow.map(val => row.indexOf(val) !== -1).some(b => b === false)) {
+						indexToIgnore.push(i);
 					}
 				}
 			}
-			else {
-				return candidates;
+			if (criters?.col) {
+				candidates = candidates.filter((cell, index) => !indexToIgnore.includes(index) && cell.col === criters.col)
 			}
 
-			return finals;
+
+			return candidates.filter((cell, index) => indexToIgnore.includes(index) === false);
 		}
 
 		private static normalize(str: string): string {
-			return str.trim().replace(/ /g, "_").toLowerCase();
+			return str.trim().replace(/ /g, "_").toLowerCase().replace(/[éèêë]/g, "e");
 		}
 
 		private static async instance(name: string): Promise<Sheet> {
